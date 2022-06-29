@@ -20,14 +20,12 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
-    $router->group(['prefix' => 'user'], function () use ($router) {
-        $router->post('/register', 'ApiController@registerUser');
-        $router->post('/sign-in', 'ApiController@authUser');
-        $router->post('/recover-password', 'ApiController@recoverUserPassword');
+    $router->post('/user/register', 'ApiController@registerUser');
+    $router->post('/user/sign-in', 'ApiController@authUser');
+    $router->post('/user/recover-password', 'ApiController@recoverUserPassword');
 
-        $router->group(['middleware' => 'auth'], function () use ($router) {
-            $router->get('/companies', 'ApiController@getUserCompanies');
-            $router->post('/companies', 'ApiController@createUserCompany');
-        });
+    $router->group(['middleware' => 'auth'], function () use ($router) {
+        $router->get('/user/companies', 'ApiController@getUserCompanies');
+        $router->post('/user/companies', 'ApiController@createUserCompany');
     });
 });
